@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      maxWidth: {
+        "safe-viewport": "1200px",
+      },
     },
   },
   plugins: [],
