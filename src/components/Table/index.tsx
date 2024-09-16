@@ -1,10 +1,4 @@
-import { TableHTMLAttributes } from "react";
-
-export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
-  columns: string[];
-  data: any[];
-  title: string;
-}
+import { TableProps } from "./types";
 
 export const Table = ({ columns, data, title }: TableProps) => {
   return (
