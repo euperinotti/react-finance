@@ -24,8 +24,8 @@ export const AccountBalanceType = {
   },
   balance: {
     icon: ({ ...rest }) => <WalletIcon {...rest} />,
-    color: "text-blue-500",
-    bgColor: "bg-blue-200",
+    color: "text-purple-500",
+    bgColor: "bg-purple-200",
     title: "Balance",
   },
 };

@@ -10,8 +10,8 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 export const ButtonType = {
   default:
-    "bg-blue-700 border border-blue-600 text-white py-3 px-6 rounded hover:bg-blue-800 active:bg-blue-600",
-  danger: "bg-red-700 border border-red-600 text-white py-3 px-6 rounded",
+    "bg-blue-700 border border-blue-600 text-white py-2 px-6 rounded hover:bg-blue-800 active:bg-blue-600",
+  danger: "bg-red-700 border border-red-600 text-white py-2 px-6 rounded",
 };
 
 export const Button = ({
@@ -26,7 +26,7 @@ export const Button = ({
   return (
     <button
       {...rest}
-      className={`${ButtonType[type]} text-lg font-bold flex items-center gap-4 ${rest.className}`}
+      className={`${ButtonType[type]} font-bold flex items-center gap-4 ${rest.className}`}
     >
       {label}
       {icon && <Icon className={`${iconClassNames}`} />}
