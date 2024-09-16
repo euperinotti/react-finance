@@ -7,18 +7,20 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Table } from "@/components/Table";
 import { useWallet } from "@/hooks/useWallet";
+import { useRef } from "react";
 
 export default function Home() {
-  const { addEntry, wallet, history } = useWallet();
+  const { wallet, history } = useWallet();
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const handleNewEntry = () => {
-    const response = addEntry(500, "income");
+    dialogRef?.current?.showModal();
   };
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <Dialog>
-        <NewEntryForm />
+      <Dialog ref={dialogRef}>
+        <NewEntryForm onClose={() => dialogRef?.current?.close()} />
       </Dialog>
       <Header />
       <main className="w-full flex flex-col items-center justify-center gap-6 -mt-6">
@@ -36,13 +38,13 @@ export default function Home() {
         iconClassNames="w-6 h-6"
         type="default"
         className="self-end"
-        onClick={() => handleNewEntry()}
+        onClick={handleNewEntry}
       />
       <section className="w-full flex flex-col items-center justify-center gap-6 py-12">
         <div className="w-full flex flex-col items-center justify-center gap-4 max-w-safe-viewport">
           <Table
             columns={["value", "date", "operation"]}
-            data={history}
+            data={[...history].reverse()}
             title="History"
           />
         </div>
