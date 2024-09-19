@@ -8,7 +8,7 @@ export interface IWallet {
 
 export interface IWalletHistory {
   value: number;
-  date: string;
+  date: Date;
   operation: WalletOperation;
 }
 
