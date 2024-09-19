@@ -22,11 +22,23 @@ export const Table = ({ columns, data, title }: TableProps) => {
                 key={key}
                 className="text-center hover:bg-gray-50 border-b border-b-gray-100"
               >
-                {columns.map((c, i) => (
-                  <td key={c + i} className="py-3">
-                    {e[c]}
-                  </td>
-                ))}
+                {columns.map((c, i) => {
+                  let value = e[c];
+
+                  if (c == "date") {
+                    value = e[c].toLocaleDateString("pt-BR");
+                  }
+
+                  if (c == "operation") {
+                    value = e[c].toUpperCase();
+                  }
+
+                  return (
+                    <td key={c + i} className="py-3">
+                      {value}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           {data.length == 0 && (

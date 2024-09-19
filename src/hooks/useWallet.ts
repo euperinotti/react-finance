@@ -16,7 +16,7 @@ export const useWallet = () => {
     const newValue = wallet[operation] + value;
 
     setWallet({ ...wallet, [operation]: newValue });
-    setHistory([...history, { date: "date", operation, value }]);
+    setHistory([...history, { date: new Date(), operation, value }]);
 
     return { wallet, history };
   };
