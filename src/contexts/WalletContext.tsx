@@ -3,7 +3,7 @@
 import { createContext, useMemo, useState } from "react";
 import {
   IWalletContext,
-  IWalletHistory,
+  IWalletEntry,
   WalletContextProps,
 } from "./@types/WalletContextTypes";
 
@@ -16,7 +16,7 @@ export const WalletContext = ({ children }: WalletContextProps) => {
     balance: 0,
   });
 
-  const [history, setHistory] = useState<IWalletHistory[] | []>([]);
+  const [history, setHistory] = useState<IWalletEntry[] | []>([]);
 
   useMemo(() => {
     const newBalance = wallet.income - wallet.outcome;

@@ -6,18 +6,21 @@ export interface IWallet {
   balance: number;
 }
 
-export interface IWalletHistory {
+export interface IWalletEntry {
+  id: string;
   value: number;
   date: Date;
   operation: WalletOperation;
+  description?: string;
+  category?: string;
 }
 
 export type WalletOperation = "income" | "outcome";
 
 export interface IWalletContext {
   wallet: IWallet;
-  history: IWalletHistory[] | [];
-  setHistory: (value: IWalletHistory[] | []) => void;
+  history: IWalletEntry[] | [];
+  setHistory: (value: IWalletEntry[] | []) => void;
   setWallet: (value: IWallet) => void;
 }
 
