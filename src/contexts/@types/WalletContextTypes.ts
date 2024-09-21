@@ -27,3 +27,13 @@ export interface IWalletContext {
 export interface WalletContextProps {
   children: ReactNode;
 }
+
+export enum EntryCategory {
+  GENERAL = "General",
+  INVESTMENTS = "Investments",
+  HEALTH = "Health",
+  TRANSPORT = "Transport",
+  GAMES = "Games",
+  MARKET = "Market",
+  GAS = "Gas",
+}
