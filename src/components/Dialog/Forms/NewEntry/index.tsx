@@ -2,7 +2,9 @@ import { Button } from "@/components/Button";
 import { InputContainer } from "@/components/Input/InputContainer";
 import { InputNumber } from "@/components/Input/InputNumber";
 import { InputRadio } from "@/components/Input/InputRadio";
+import { InputText } from "@/components/Input/InputText";
 import {
+  EntryCategory,
   IWalletEntry,
   WalletOperation,
 } from "@/contexts/@types/WalletContextTypes";
@@ -21,6 +23,8 @@ const initialState: IWalletEntry = {
   description: "",
   category: "",
 };
+
+const entryCategories = Object.keys(EntryCategory);
 
 export const NewEntryForm = ({ onClose, ...rest }: NewEntryFormProps) => {
   const [form, setForm] = useState<IWalletEntry>(initialState);
@@ -52,6 +56,12 @@ export const NewEntryForm = ({ onClose, ...rest }: NewEntryFormProps) => {
         </h1>
       </div>
       <div className="flex flex-col item-start justify-start gap-4 p-5">
+        <InputContainer label="Description">
+          <InputText
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            value={form.description}
+          />
+        </InputContainer>
         <InputContainer label="Value">
           <InputNumber
             onChange={(e) =>
@@ -75,8 +85,21 @@ export const NewEntryForm = ({ onClose, ...rest }: NewEntryFormProps) => {
             name="entry-type"
             value="outcome"
             id="entry-outcome"
-            onChange={(e) => setForm({ ...form, operation: e.target.value as WalletOperation })}
+            onChange={(e) =>
+              setForm({ ...form, operation: e.target.value as WalletOperation })
+            }
           />
+        </InputContainer>
+        <InputContainer label="Category">
+          <select
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+          >
+            {entryCategories.map((category, key) => (
+              <option key={key} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </InputContainer>
       </div>
       <div className="flex item-start justify-end gap-4 p-5">
