@@ -1,4 +1,3 @@
-import { WalletContext } from "@/contexts/WalletContext";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -17,8 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased w-full min-h-full h-dvh`}>
-        <WalletContext>{children}</WalletContext>
+      <body
+        className={`${inter.className} antialiased w-full min-h-full h-dvh`}
+      >
+        {children}
       </body>
     </html>
   );
