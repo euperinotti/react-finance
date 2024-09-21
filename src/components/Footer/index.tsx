@@ -7,7 +7,7 @@ export const Footer = () => {
     <footer className="w-full h-auto bg-slate-50 flex gap-2 flex-wrap items-center justify-center p-12">
       <div className="w-full h-full flex justify-between items-center max-w-safe-viewport">
         <FooterList title="Application">
-          <FooterListItem label="Home" link="/home" />
+          <FooterListItem label="Home" link="/" />
           <FooterListItem label="About" link="/about" />
           <FooterListItem label="Dashboard" link="/dashboard" />
         </FooterList>
