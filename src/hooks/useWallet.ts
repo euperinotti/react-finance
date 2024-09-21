@@ -3,7 +3,6 @@
 import {
   IWalletContext,
   IWalletEntry,
-  WalletOperation,
 } from "@/contexts/@types/WalletContextTypes";
 import { WalletProvider } from "@/contexts/WalletContext";
 import { randomUUID } from "crypto";
@@ -14,12 +13,8 @@ export const useWallet = () => {
     WalletProvider
   ) as IWalletContext;
 
-  const addEntry = (
-    value: number,
-    operation: WalletOperation,
-    description: string,
-    category: string
-  ) => {
+  const addEntry = (entry: IWalletEntry) => {
+    const { operation, value, description, category } = entry;
     const newValue = wallet[operation] + value;
 
     setWallet({ ...wallet, [operation]: newValue });
