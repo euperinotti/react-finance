@@ -43,7 +43,7 @@ export default function Dashboard() {
       <section className="w-full flex flex-col items-center justify-center gap-6 py-12 mb-12">
         <div className="w-full flex flex-col items-center justify-center gap-4 max-w-safe-viewport">
           <Table
-            columns={["value", "date", "operation"]}
+            columns={["description", "value", "date", "operation", "category"]}
             data={[...history].reverse()}
             title="History"
           />
