@@ -18,7 +18,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <Dialog ref={dialogRef}>
         <NewEntryForm onClose={() => dialogRef?.current?.close()} />
       </Dialog>
@@ -40,7 +40,7 @@ export default function Dashboard() {
         className="self-end"
         onClick={handleNewEntry}
       />
-      <section className="w-full flex flex-col items-center justify-center gap-6 py-12">
+      <section className="w-full flex flex-col items-center justify-center gap-6 py-12 mb-12">
         <div className="w-full flex flex-col items-center justify-center gap-4 max-w-safe-viewport">
           <Table
             columns={["value", "date", "operation"]}
