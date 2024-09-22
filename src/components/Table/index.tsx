@@ -1,4 +1,6 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
+import { EllipsisVerticalIcon } from "../icons/EllipsisVerticalIcon";
+import { TableDropdown } from "./Dropdown";
 import { TableProps } from "./types";
 
 export const Table = ({
@@ -8,11 +10,12 @@ export const Table = ({
   onUpdateRow,
   onDeleteRow,
 }: TableProps) => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleDeleteRow = (e: MouseEvent<HTMLTableDataCellElement>) => {
+  const handleDeleteRow = (e: MouseEvent<any>) => {
     const uuid = e?.currentTarget?.closest("tr")?.dataset.id;
     onDeleteRow?.(uuid!);
-  }
+  };
 
   return (
     <div className="w-full rounded-lg flex flex-col gap-2">
@@ -59,11 +62,17 @@ export const Table = ({
                     </td>
                   );
                 })}
-                <td className="py-3" onClick={onUpdateRow}>
-                  Edit
-                </td>
-                <td className="py-3" onClick={handleDeleteRow}>
-                  Delete
+                <td onClick={() => setDropdownOpen(!isDropdownOpen)}>
+                  <EllipsisVerticalIcon className="text-gray-600" />
+                  <TableDropdown
+                    isOpen={isDropdownOpen}
+                    title="Actions"
+                    options={[
+                      { label: "Edit", onClick: onUpdateRow },
+                      { label: "Delete", onClick: handleDeleteRow, className: "text-red-600" },
+                    ]}
+                    onClick={() => setDropdownOpen(!isDropdownOpen)}
+                  />
                 </td>
               </tr>
             ))}
