@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   IWalletContext,
   IWalletEntry,
@@ -18,10 +18,10 @@ export const WalletContext = ({ children }: WalletContextProps) => {
 
   const [history, setHistory] = useState<IWalletEntry[] | []>([]);
 
-  useMemo(() => {
+  useEffect(() => {
     const newBalance = wallet.income - wallet.outcome;
-
     setWallet({ ...wallet, balance: newBalance });
+
   }, [wallet.income, wallet.outcome]);
 
   return (

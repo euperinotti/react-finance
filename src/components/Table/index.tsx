@@ -1,6 +1,19 @@
+import { MouseEvent } from "react";
 import { TableProps } from "./types";
 
-export const Table = ({ columns, data, title }: TableProps) => {
+export const Table = ({
+  columns,
+  data,
+  title,
+  onUpdateRow,
+  onDeleteRow,
+}: TableProps) => {
+
+  const handleDeleteRow = (e: MouseEvent<HTMLTableDataCellElement>) => {
+    const uuid = e?.currentTarget?.closest("tr")?.dataset.id;
+    onDeleteRow?.(uuid!);
+  }
+
   return (
     <div className="w-full rounded-lg flex flex-col gap-2">
       <h3 className="text-lg font-bold">{title}</h3>
@@ -20,12 +33,13 @@ export const Table = ({ columns, data, title }: TableProps) => {
             data.map((e, key) => (
               <tr
                 key={key}
+                data-id={e.id}
                 className="text-center hover:bg-gray-50 border-b border-b-gray-100"
               >
                 {columns.map((c, i) => {
                   let value = e[c];
 
-                  switch(c) {
+                  switch (c) {
                     case "date":
                       value = e[c].toLocaleDateString("pt-BR");
                       break;
@@ -33,7 +47,10 @@ export const Table = ({ columns, data, title }: TableProps) => {
                       value = e[c].toUpperCase();
                       break;
                     case "value":
-                      value = e[c]
+                      value = e[c].toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      });
                   }
 
                   return (
@@ -42,6 +59,12 @@ export const Table = ({ columns, data, title }: TableProps) => {
                     </td>
                   );
                 })}
+                <td className="py-3" onClick={onUpdateRow}>
+                  Edit
+                </td>
+                <td className="py-3" onClick={handleDeleteRow}>
+                  Delete
+                </td>
               </tr>
             ))}
           {data.length == 0 && (
