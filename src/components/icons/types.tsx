@@ -1,5 +1,6 @@
 import { SVGAttributes } from "react";
 import { DecreaseIcon } from "./DecreaseIcon";
+import { EllipsisVerticalIcon } from "./EllipsisVerticalIcon";
 import { IncreaseIcon } from "./IncreaseIcon";
 import { PlusIcon } from "./PlusIcon";
 import { WalletIcon } from "./WalletIcon";
@@ -12,5 +13,6 @@ export const Icons = {
     <IncreaseIcon {...props} />
   ),
   wallet: (props: SVGAttributes<SVGSVGElement>) => <WalletIcon {...props} />,
-  plus: (props: SVGAttributes<SVGSVGElement>) => <PlusIcon {...props} />,
+  plus: (props: SVGAttributes<SVGSVGElement>) => <PlusIcon {...props} /> ,
+  ellipsisVertical: (props: SVGAttributes<SVGSVGElement>) => <EllipsisVerticalIcon {...props} />
 };
