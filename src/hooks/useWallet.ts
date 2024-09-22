@@ -5,8 +5,8 @@ import {
   IWalletEntry,
 } from "@/contexts/@types/WalletContextTypes";
 import { WalletProvider } from "@/contexts/WalletContext";
-import { randomUUID } from "crypto";
 import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const useWallet = () => {
   const { wallet, setWallet, history, setHistory } = useContext(
@@ -16,28 +16,29 @@ export const useWallet = () => {
   const addEntry = (entry: IWalletEntry) => {
     const { operation, value, description, category } = entry;
     const newValue = wallet[operation] + value;
+    const newEntry = {
+      id: uuidv4(),
+      date: new Date(),
+      operation,
+      value,
+      description,
+      category,
+    };
 
     setWallet({ ...wallet, [operation]: newValue });
-    setHistory([
-      ...history,
-      {
-        id: randomUUID(),
-        date: new Date(),
-        operation,
-        value,
-        description,
-        category,
-      },
-    ]);
+    setHistory([...history, newEntry]);
 
     return { wallet, history };
   };
 
   const deleteEntry = (entryId: string) => {
+    const entry = history.find((entry) => entry.id === entryId);
     const newHistory = history.filter((entry) => entry.id !== entryId);
-    const newBalance = wallet.income - wallet.outcome;
 
-    setWallet({ ...wallet, balance: newBalance });
+    setWallet({
+      ...wallet,
+      [entry!.operation]: wallet[entry!.operation] - entry!.value,
+    });
     setHistory(newHistory);
   };
 
