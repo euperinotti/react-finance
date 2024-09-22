@@ -4,8 +4,8 @@ export const Table = ({ columns, data, title }: TableProps) => {
   return (
     <div className="w-full rounded-lg flex flex-col gap-2">
       <h3 className="text-lg font-bold">{title}</h3>
-      <table className="w-full table-auto shadow-sm rounded-xl overflow-hidden">
-        <thead className="text-gray-500 font-light bg-gray-100 rounded-xl">
+      <table className="w-full table-auto rounded-xl overflow-hidden">
+        <thead className="text-gray-500 font-light rounded-xl border-b">
           <tr className="">
             {columns.map((e, key) => (
               <th key={key} className="font-normal py-2">
@@ -25,12 +25,15 @@ export const Table = ({ columns, data, title }: TableProps) => {
                 {columns.map((c, i) => {
                   let value = e[c];
 
-                  if (c == "date") {
-                    value = e[c].toLocaleDateString("pt-BR");
-                  }
-
-                  if (c == "operation") {
-                    value = e[c].toUpperCase();
+                  switch(c) {
+                    case "date":
+                      value = e[c].toLocaleDateString("pt-BR");
+                      break;
+                    case "operation":
+                      value = e[c].toUpperCase();
+                      break;
+                    case "value":
+                      value = e[c]
                   }
 
                   return (
