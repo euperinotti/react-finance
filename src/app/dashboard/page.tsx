@@ -18,12 +18,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <Dialog ref={dialogRef}>
         <NewEntryForm onClose={() => dialogRef?.current?.close()} />
       </Dialog>
       <Header />
-      <main className="w-full flex flex-col items-center justify-center gap-6 -mt-6">
+      <main className="w-full flex flex-1 flex-col items-center justify-center gap-6 -mt-6">
         <div className="w-full flex flex-col items-center justify-center gap-4 max-w-safe-viewport">
           <div className="w-full flex items-center justify-center gap-3">
             <AccountBalanceCard type="income" value={wallet.income} />
@@ -40,7 +40,7 @@ export default function Dashboard() {
           />
         </div>
       </main>
-      <section className="w-full flex flex-col items-center justify-center gap-6 py-12 mb-12">
+      <section className="w-full flex flex-1 flex-col items-center justify-center gap-6 py-12 mb-12">
         <div className="w-full flex flex-col items-center justify-center gap-4 max-w-safe-viewport">
           <Table
             columns={["description", "value", "date", "operation", "category"]}

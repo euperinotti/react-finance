@@ -4,7 +4,7 @@ import { FooterListItem } from "./List/Item";
 
 export const Footer = () => {
   return (
-    <footer className="w-full h-auto bg-slate-50 flex gap-2 flex-wrap items-center justify-center p-12">
+    <footer className="w-full h-auto bg-slate-50 flex gap-2 flex-wrap items-center justify-center p-12 mt-auto">
       <div className="w-full h-full flex justify-between items-center max-w-safe-viewport">
         <FooterList title="Application">
           <FooterListItem label="Home" link="/" />

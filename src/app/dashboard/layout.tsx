@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased w-full min-h-full h-dvh`}>
+      <body className={`${inter.className} antialiased w-full`}>
         <WalletContext>{children}</WalletContext>
       </body>
     </html>

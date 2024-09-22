@@ -15,7 +15,7 @@ export const Dialog = forwardRef(
     return (
       <dialog
         {...rest}
-        className="min-w-full min-h-full h-dvh z-50 absolute bg-blend-overlay bg-gray-900 bg-opacity-40 transition-opacity m-0 p-0 right-0 "
+        className="min-w-full min-h-full h-dvh z-50 fixed bg-blend-overlay bg-gray-900 bg-opacity-40 transition-opacity m-0 p-0 right-0 "
         onClick={handleDialogClick}
         ref={ref}
       >
