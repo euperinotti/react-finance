@@ -10,7 +10,7 @@ import { useWallet } from "@/hooks/useWallet";
 import { useRef } from "react";
 
 export default function Dashboard() {
-  const { wallet, history } = useWallet();
+  const { wallet, history, deleteEntry } = useWallet();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const handleNewEntry = () => {
@@ -18,7 +18,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center">
       <Dialog ref={dialogRef}>
         <NewEntryForm onClose={() => dialogRef?.current?.close()} />
       </Dialog>
@@ -30,22 +30,24 @@ export default function Dashboard() {
             <AccountBalanceCard type="outcome" value={wallet.outcome} />
             <AccountBalanceCard type="balance" value={wallet.balance} />
           </div>
+          <Button
+            label="New transaction"
+            icon="plus"
+            iconClassNames="w-6 h-6"
+            styleType="default"
+            className="self-end"
+            onClick={handleNewEntry}
+          />
         </div>
       </main>
-      <Button
-        label="New transaction"
-        icon="plus"
-        iconClassNames="w-6 h-6"
-        type="default"
-        className="self-end"
-        onClick={handleNewEntry}
-      />
       <section className="w-full flex flex-col items-center justify-center gap-6 py-12 mb-12">
         <div className="w-full flex flex-col items-center justify-center gap-4 max-w-safe-viewport">
           <Table
             columns={["description", "value", "date", "operation", "category"]}
             data={[...history].reverse()}
             title="History"
+            onUpdateRow={() => dialogRef?.current?.showModal()}
+            onDeleteRow={(e) => deleteEntry(e)}
           />
         </div>
       </section>
