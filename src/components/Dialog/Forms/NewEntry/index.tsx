@@ -103,8 +103,8 @@ export const NewEntryForm = ({ onClose, ...rest }: NewEntryFormProps) => {
         </InputContainer>
       </div>
       <div className="flex item-start justify-end gap-4 p-5">
-        <Button label="Close" type="danger" onClick={handleCloseForm} />
-        <Button label="Save" type="default" />
+        <Button label="Close" styleType="danger" type="reset" onClick={handleCloseForm} />
+        <Button label="Save" styleType="default" type="submit" />
       </div>
     </form>
   );
