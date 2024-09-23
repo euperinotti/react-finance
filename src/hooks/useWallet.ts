@@ -15,7 +15,6 @@ export const useWallet = () => {
 
   const addEntry = (entry: IWalletEntry) => {
     const { operation, value, description, category } = entry;
-    const newValue = wallet[operation] + value;
     const newEntry = {
       id: uuidv4(),
       date: new Date(),
@@ -25,29 +24,27 @@ export const useWallet = () => {
       category,
     };
 
-    setWallet({ ...wallet, [operation]: newValue });
     setHistory([...history, newEntry]);
 
     return { wallet, history };
   };
 
   const deleteEntry = (entryId: string) => {
-    const entry = history.find((entry) => entry.id === entryId);
     const newHistory = history.filter((entry) => entry.id !== entryId);
 
-    setWallet({
-      ...wallet,
-      [entry!.operation]: wallet[entry!.operation] - entry!.value,
-    });
     setHistory(newHistory);
   };
 
   const updateEntry = (entry: IWalletEntry) => {
-    const updatedHistory = history.map((entryItem) =>
-      entryItem.id === entry.id ? entry : entryItem
-    );
+    const updatedHistory = history.map((item) => {
+      if (item.id === entry.id) {
+        item = { ...entry };
+      }
 
-    setHistory(updatedHistory);
+      return item;
+    });
+
+    setHistory([...updatedHistory]);
   };
 
   return {

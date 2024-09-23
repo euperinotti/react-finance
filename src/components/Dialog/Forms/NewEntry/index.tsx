@@ -32,22 +32,31 @@ export const NewEntryForm = ({
   entry,
   ...rest
 }: NewEntryFormProps) => {
-  const [form, setForm] = useState<IWalletEntry>(entry?.id ? entry : initialState);
-  const { addEntry } = useWallet();
+  const [form, setForm] = useState<IWalletEntry>(
+    entry?.id ? entry : initialState
+  );
+  const { addEntry, updateEntry } = useWallet();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addEntry({ ...form });
-    onClose?.();
+    if (entry && entry.id) {
+      updateEntry({ ...form });
+    } else {
+      addEntry({ ...form });
+    }
+    handleCloseForm()
   };
 
   const handleCloseForm = () => {
     onClose?.();
+    setForm(initialState);
   };
 
   useEffect(() => {
-    setForm(initialState);
-  }, [onClose]);
+    if (entry) {
+      setForm(entry);
+    }
+  }, [entry]);
 
   return (
     <form

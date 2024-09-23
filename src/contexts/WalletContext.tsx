@@ -19,10 +19,18 @@ export const WalletContext = ({ children }: WalletContextProps) => {
   const [history, setHistory] = useState<IWalletEntry[] | []>([]);
 
   useEffect(() => {
-    const newBalance = wallet.income - wallet.outcome;
-    setWallet({ ...wallet, balance: newBalance });
+    const temp = {
+      income: 0,
+      outcome: 0,
+      balance: 0,
+    }
 
-  }, [wallet.income, wallet.outcome]);
+    for (const item of history) {
+      temp[item.operation] = temp[item.operation] + item.value;
+    }
+
+    setWallet({ ...temp, balance: temp.income - temp.outcome });
+  }, [history]);
 
   return (
     <WalletProvider.Provider value={{ wallet, setWallet, history, setHistory }}>
