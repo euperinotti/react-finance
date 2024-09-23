@@ -17,6 +17,20 @@ export const Table = ({
     onDeleteRow?.(uuid!);
   };
 
+  const handleUpdateRow = (e: MouseEvent<any>) => {
+    const uuid = e?.currentTarget?.closest("tr")?.dataset.id;
+    onUpdateRow?.(uuid!);
+  };
+
+  const tableOptions = [
+    { label: "Edit", onClick: handleUpdateRow },
+    {
+      label: "Delete",
+      onClick: handleDeleteRow,
+      className: "text-red-600",
+    },
+  ];
+
   return (
     <div className="w-full rounded-lg flex flex-col gap-2">
       <h3 className="text-lg font-bold">{title}</h3>
@@ -62,16 +76,16 @@ export const Table = ({
                     </td>
                   );
                 })}
-                <td onClick={() => setDropdownOpen(!isDropdownOpen)}>
+                <td
+                  onClick={(e) => {
+                    setDropdownOpen(!isDropdownOpen);
+                  }}
+                >
                   <EllipsisVerticalIcon className="text-gray-600" />
                   <TableDropdown
                     isOpen={isDropdownOpen}
                     title="Actions"
-                    options={[
-                      { label: "Edit", onClick: onUpdateRow },
-                      { label: "Delete", onClick: handleDeleteRow, className: "text-red-600" },
-                    ]}
-                    onClick={() => setDropdownOpen(!isDropdownOpen)}
+                    options={tableOptions}
                   />
                 </td>
               </tr>

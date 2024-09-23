@@ -6,21 +6,29 @@ import { NewEntryForm } from "@/components/Dialog/Forms/NewEntry";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Table } from "@/components/Table";
+import { IWalletEntry } from "@/contexts/@types/WalletContextTypes";
 import { useWallet } from "@/hooks/useWallet";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Dashboard() {
   const { wallet, history, deleteEntry } = useWallet();
+  const [currentEntry, setCurrentEntry] = useState<IWalletEntry | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const handleNewEntry = () => {
     dialogRef?.current?.showModal();
   };
 
+  const handleUpdateEntry = (id: string) => {
+    const entry = history.find((e) => e.id == id);
+    setCurrentEntry(entry as IWalletEntry);
+    handleNewEntry()
+  };
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <Dialog ref={dialogRef}>
-        <NewEntryForm onClose={() => dialogRef?.current?.close()} />
+        <NewEntryForm onClose={() => dialogRef?.current?.close()} entry={currentEntry} />
       </Dialog>
       <Header />
       <main className="w-full flex flex-1 flex-col items-center justify-center gap-6 -mt-6">
@@ -40,14 +48,14 @@ export default function Dashboard() {
           />
         </div>
       </main>
-      <section className="w-full flex flex-1 flex-col items-center justify-center gap-6 py-12 mb-12">
+      <section className="w-full flex flex-1 flex-col items-center justify-center gap-6 py-12 mb-12 min-h-80">
         <div className="w-full flex flex-col items-center justify-center gap-4 max-w-safe-viewport">
           <Table
             columns={["description", "value", "date", "operation", "category"]}
             data={[...history].reverse()}
             title="History"
-            onUpdateRow={() => dialogRef?.current?.showModal()}
-            onDeleteRow={(e) => deleteEntry(e)}
+            onUpdateRow={handleUpdateEntry}
+            onDeleteRow={deleteEntry}
           />
         </div>
       </section>

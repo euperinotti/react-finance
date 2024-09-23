@@ -13,6 +13,7 @@ import { FormEvent, FormHTMLAttributes, useEffect, useState } from "react";
 
 export interface NewEntryFormProps extends FormHTMLAttributes<HTMLFormElement> {
   onClose?: () => void;
+  entry: IWalletEntry | null;
 }
 
 const initialState: IWalletEntry = {
@@ -26,8 +27,12 @@ const initialState: IWalletEntry = {
 
 const entryCategories = Object.keys(EntryCategory);
 
-export const NewEntryForm = ({ onClose, ...rest }: NewEntryFormProps) => {
-  const [form, setForm] = useState<IWalletEntry>(initialState);
+export const NewEntryForm = ({
+  onClose,
+  entry,
+  ...rest
+}: NewEntryFormProps) => {
+  const [form, setForm] = useState<IWalletEntry>(entry?.id ? entry : initialState);
   const { addEntry } = useWallet();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -68,6 +73,7 @@ export const NewEntryForm = ({ onClose, ...rest }: NewEntryFormProps) => {
               setForm({ ...form, value: Number(e.target.value) })
             }
             value={form.value}
+            min={0}
           />
         </InputContainer>
         <InputContainer label="Entry type">
@@ -103,7 +109,12 @@ export const NewEntryForm = ({ onClose, ...rest }: NewEntryFormProps) => {
         </InputContainer>
       </div>
       <div className="flex item-start justify-end gap-4 p-5">
-        <Button label="Close" styleType="danger" type="reset" onClick={handleCloseForm} />
+        <Button
+          label="Close"
+          styleType="danger"
+          type="reset"
+          onClick={handleCloseForm}
+        />
         <Button label="Save" styleType="default" type="submit" />
       </div>
     </form>
