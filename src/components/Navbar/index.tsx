@@ -20,7 +20,7 @@ export const Navbar = ({ ...rest }: NavbarProps) => {
         <ul className="list-none flex items-center max-md:flex-col max-md:gap-0 max-md:p-2 max-md:bg-gray-100 max-md:rounded-md">
           <NavbarItem label="Home" href="/" isActive={true} />
           <NavbarItem label="About" href="/about" isActive={false} />
-          <NavbarItem label="Dashboard" href="/dashboard" isActive={false} />
+          <NavbarItem label="Login" href="/login" isActive={false} />
         </ul>
       </div>
       {isOpen && (
@@ -28,7 +28,7 @@ export const Navbar = ({ ...rest }: NavbarProps) => {
           <ul className="list-none flex items-center gap-14 max-md:flex-col max-md:gap-0 max-md:p-2 max-md:bg-blue-700 max-md:rounded-md">
             <NavbarItem label="Home" href="/" isActive={true} />
             <NavbarItem label="About" href="/about" isActive={false} />
-            <NavbarItem label="Dashboard" href="/dashboard" isActive={false} />
+            <NavbarItem label="Login" href="/login" isActive={false} />
           </ul>
         </div>
       )}
