@@ -11,15 +11,16 @@ export const Table = ({
   onDeleteRow,
 }: TableProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [id, setId] = useState("");
 
   const handleDeleteRow = (e: MouseEvent<any>) => {
-    const uuid = e?.currentTarget?.closest("tr")?.dataset.id;
-    onDeleteRow?.(uuid!);
+    onDeleteRow?.(id);
+    setDropdownOpen(false);
   };
 
   const handleUpdateRow = (e: MouseEvent<any>) => {
-    const uuid = e?.currentTarget?.closest("tr")?.dataset.id;
-    onUpdateRow?.(uuid!);
+    onUpdateRow?.(id);
+    setDropdownOpen(false);
   };
 
   const tableOptions = [
@@ -27,8 +28,8 @@ export const Table = ({
     {
       label: "Delete",
       onClick: handleDeleteRow,
-      className: "text-red-600",
-    },
+      className: "text-red-600"
+    }
   ];
 
   return (
@@ -79,14 +80,10 @@ export const Table = ({
                 <td
                   onClick={(e) => {
                     setDropdownOpen(!isDropdownOpen);
+                    setId(e.currentTarget.closest("tr")?.dataset.id!);
                   }}
                 >
                   <EllipsisVerticalIcon className="text-gray-600" />
-                  <TableDropdown
-                    isOpen={isDropdownOpen}
-                    title="Actions"
-                    options={tableOptions}
-                  />
                 </td>
               </tr>
             ))}
@@ -97,6 +94,11 @@ export const Table = ({
               </td>
             </tr>
           )}
+          <TableDropdown
+            isOpen={isDropdownOpen}
+            title="Actions"
+            options={tableOptions}
+          />
         </tbody>
       </table>
     </div>

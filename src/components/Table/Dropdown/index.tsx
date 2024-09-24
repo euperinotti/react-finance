@@ -21,8 +21,8 @@ export const TableDropdown = ({
   return (
     <div
       className={`${
-        !isOpen ? "hidden" : ""
-      } z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute`}
+        !isOpen ? "hidden" : "absolute"
+      } z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 right-0`}
       {...rest}
     >
       <div className="px-4 py-3 text-sm text-gray-900 font-semibold">

@@ -26,7 +26,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
+    <div className="w-full min-h-full flex flex-col items-center justify-center">
       <Dialog ref={dialogRef}>
         <NewEntryForm onClose={() => dialogRef?.current?.close()} entry={currentEntry} />
       </Dialog>
